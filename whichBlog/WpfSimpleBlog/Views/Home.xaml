@@ -1,0 +1,226 @@
+﻿<Window x:Class="Wpf.Views.Home"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Post Management System" 
+        Height="800" Width="1280"
+        Background="#0F172A" 
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI Semibold, Segoe UI, sans-serif">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryAccent" Color="#38BDF8"/>
+        <SolidColorBrush x:Key="SecondaryAccent" Color="#818CF8"/>
+        <SolidColorBrush x:Key="CardBg" Color="#1E293B"/>
+        <SolidColorBrush x:Key="InputBg" Color="#334155"/>
+        <SolidColorBrush x:Key="TextMain" Color="#F8FAFC"/>
+        <SolidColorBrush x:Key="TextMuted" Color="#94A3B8"/>
+        <SolidColorBrush x:Key="Danger" Color="#EF4444"/>
+
+        <Style x:Key="PrimaryBtnStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryAccent}"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SecondaryBtnStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource TextMain}"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="Transparent" BorderBrush="{StaticResource TextMuted}" BorderThickness="1" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#253248"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DangerBtnStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource Danger}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource InputBg}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="{StaticResource PrimaryAccent}"/>
+            <Setter Property="BorderBrush" Value="#475569"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="6">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="ItemBorder" Background="Transparent" CornerRadius="8" Padding="10" Margin="0,2">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#334155"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#253248"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,30">
+            <TextBlock Text="POST MANAGEMENT CONSOLE" FontSize="11" Foreground="{StaticResource PrimaryAccent}" FontWeight="Bold"/>
+            <TextBlock Text="Dashboard Generale" FontSize="32" Foreground="{StaticResource TextMain}" FontWeight="ExtraBold"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="340"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="{StaticResource CardBg}" CornerRadius="12" Padding="15" Margin="0,0,15,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Archivio Posts" FontSize="18" Foreground="{StaticResource TextMain}" FontWeight="Bold" Margin="0,0,0,15"/>
+                    <Button Grid.Row="1" Content="Aggiorna Lista" Style="{StaticResource SecondaryBtnStyle}" Command="{Binding LoadArticlesCommand}" Margin="0,0,0,10"/>
+                    <ListBox Grid.Row="2" Background="Transparent" BorderThickness="0" ItemsSource="{Binding Articles}" SelectedItem="{Binding SelectedArticle}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Title}" Foreground="{StaticResource TextMain}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding CreatedAt, StringFormat='dd/MM/yyyy'}" Foreground="{StaticResource TextMuted}" FontSize="11"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock Grid.Row="3" Text="{Binding StatusMessage}" Foreground="#10B981" FontSize="12" Margin="0,10,0,0" TextWrapping="Wrap"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Background="{StaticResource CardBg}" CornerRadius="12" Padding="25">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Text="Editor Contenuti" FontSize="20" Foreground="{StaticResource TextMain}" FontWeight="Bold" Margin="0,0,0,20"/>
+                        <TextBlock Text="TITOLO" FontSize="10" Foreground="{StaticResource TextMuted}" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="0,0,0,20"/>
+                    </StackPanel>
+
+                    <DockPanel Grid.Row="1">
+                        <TextBlock Text="CORPO DEL TESTO" FontSize="10" Foreground="{StaticResource TextMuted}" FontWeight="Bold" Margin="0,0,0,5" DockPanel.Dock="Top"/>
+                        <TextBox Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top"/>
+                    </DockPanel>
+
+                    <UniformGrid Grid.Row="2" Columns="3" Margin="0,20,0,0">
+                        <Button Content="NUOVO" Command="{Binding CreateArticleCommand}" Style="{StaticResource SecondaryBtnStyle}" Foreground="{StaticResource SecondaryAccent}"/>
+                        <Button Content="SALVA" Command="{Binding ModifyArticleCommand}" Style="{StaticResource PrimaryBtnStyle}"/>
+                        <Button Content="ELIMINA" Command="{Binding DeleteArticleCommand}" Style="{StaticResource DangerBtnStyle}"/>
+                    </UniformGrid>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Background="{StaticResource CardBg}" CornerRadius="12" Padding="20" Margin="15,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="Ricerca e Filtri" FontSize="18" Foreground="{StaticResource TextMain}" FontWeight="Bold" Margin="0,0,0,20"/>
+
+                    <TextBlock Text="CERCA PER TITOLO" FontSize="10" Foreground="{StaticResource TextMuted}" Margin="0,0,0,5"/>
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding SearchTitleText, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Column="1" Content="🔍" Style="{StaticResource PrimaryBtnStyle}" Command="{Binding SearchByTitleCommand}" Width="40" Margin="5,0,0,0"/>
+                    </Grid>
+
+                    <Separator Background="#334155" Margin="0,0,0,20"/>
+
+                    <TextBlock Text="FILTRO DATA" FontSize="10" Foreground="{StaticResource TextMuted}" Margin="0,0,0,5"/>
+                    <DatePicker SelectedDate="{Binding SearchDate}" Margin="0,0,0,10"/>
+                    <Button Content="Applica Filtro Data" Style="{StaticResource SecondaryBtnStyle}" Command="{Binding SearchByDateCommand}" Margin="0,0,0,20"/>
+
+                    <TextBlock Text="RANGE TEMPORALE" FontSize="10" Foreground="{StaticResource TextMuted}" Margin="0,0,0,5"/>
+                    <DatePicker SelectedDate="{Binding SearchStartDate}" Margin="0,0,0,5"/>
+                    <DatePicker SelectedDate="{Binding SearchEndDate}" Margin="0,0,0,15"/>
+                    <Button Content="Ricerca nel Periodo" Style="{StaticResource PrimaryBtnStyle}" Background="{StaticResource SecondaryAccent}" Command="{Binding SearchInPeriodCommand}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
