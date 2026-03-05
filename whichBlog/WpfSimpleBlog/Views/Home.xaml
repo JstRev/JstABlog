@@ -206,7 +206,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBox Text="{Binding SearchTitleText, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Grid.Column="1" Content="🔍" Style="{StaticResource PrimaryBtnStyle}" Command="{Binding SearchByTitleCommand}" Width="40" Margin="5,0,0,0"/>
+                        <Button Grid.Column="1"  Style="{StaticResource PrimaryBtnStyle}" Command="{Binding SearchByTitleCommand}" Width="40" Margin="5,0,0,0"/>
                     </Grid>
 
                     <Separator Background="#334155" Margin="0,0,0,20"/>
