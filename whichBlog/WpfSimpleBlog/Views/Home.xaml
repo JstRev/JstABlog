@@ -135,7 +135,7 @@
 
         <StackPanel Grid.Row="0" Margin="0,0,0,30">
             <TextBlock Text="POST MANAGEMENT CONSOLE" FontSize="11" Foreground="{StaticResource PrimaryAccent}" FontWeight="Bold"/>
-            <TextBlock Text="Dashboard Generale" FontSize="32" Foreground="{StaticResource TextMain}" FontWeight="ExtraBold"/>
+            <TextBlock Text="Dashboard" FontSize="32" Foreground="{StaticResource TextMain}" FontWeight="ExtraBold"/>
         </StackPanel>
 
         <Grid Grid.Row="1">
@@ -153,17 +153,29 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Archivio Posts" FontSize="18" Foreground="{StaticResource TextMain}" FontWeight="Bold" Margin="0,0,0,15"/>
-                    <Button Grid.Row="1" Content="Aggiorna Lista" Style="{StaticResource SecondaryBtnStyle}" Command="{Binding LoadArticlesCommand}" Margin="0,0,0,10"/>
-                    <ListBox Grid.Row="2" Background="Transparent" BorderThickness="0" ItemsSource="{Binding Articles}" SelectedItem="{Binding SelectedArticle}">
+                    <TextBlock Text="Posts' Archive" FontSize="18" Foreground="{StaticResource TextMain}" FontWeight="Bold" Margin="0,0,0,15"/>
+                    <Button Grid.Row="1" Content="Reload List" Style="{StaticResource SecondaryBtnStyle}" Command="{Binding LoadArticlesCommand}" Margin="0,0,0,10"/>
+                    <ListBox Grid.Row="2"
+         Background="Transparent"
+         BorderThickness="0"
+         ItemsSource="{Binding Articles}"
+         SelectedItem="{Binding SelectedArticle}"
+         ScrollViewer.VerticalScrollBarVisibility="Hidden"
+         ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Title}" Foreground="{StaticResource TextMain}" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding CreatedAt, StringFormat='dd/MM/yyyy'}" Foreground="{StaticResource TextMuted}" FontSize="11"/>
+                                    <TextBlock Text="{Binding Title}"
+                           Foreground="{StaticResource TextMain}"
+                           FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding CreatedAt, StringFormat='dd/MM/yyyy'}"
+                           Foreground="{StaticResource TextMuted}"
+                           FontSize="11"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+
                     </ListBox>
                     <TextBlock Grid.Row="3" Text="{Binding StatusMessage}" Foreground="#10B981" FontSize="12" Margin="0,10,0,0" TextWrapping="Wrap"/>
                 </Grid>
@@ -177,29 +189,29 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0">
-                        <TextBlock Text="Editor Contenuti" FontSize="20" Foreground="{StaticResource TextMain}" FontWeight="Bold" Margin="0,0,0,20"/>
-                        <TextBlock Text="TITOLO" FontSize="10" Foreground="{StaticResource TextMuted}" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <TextBlock Text="Editor" FontSize="20" Foreground="{StaticResource TextMain}" FontWeight="Bold" Margin="0,0,0,20"/>
+                        <TextBlock Text="TITLE" FontSize="10" Foreground="{StaticResource TextMuted}" FontWeight="Bold" Margin="0,0,0,5"/>
                         <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="0,0,0,20"/>
                     </StackPanel>
 
                     <DockPanel Grid.Row="1">
-                        <TextBlock Text="CORPO DEL TESTO" FontSize="10" Foreground="{StaticResource TextMuted}" FontWeight="Bold" Margin="0,0,0,5" DockPanel.Dock="Top"/>
+                        <TextBlock Text="BODY" FontSize="10" Foreground="{StaticResource TextMuted}" FontWeight="Bold" Margin="0,0,0,5" DockPanel.Dock="Top"/>
                         <TextBox Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top"/>
                     </DockPanel>
 
                     <UniformGrid Grid.Row="2" Columns="3" Margin="0,20,0,0">
-                        <Button Content="NUOVO" Command="{Binding CreateArticleCommand}" Style="{StaticResource SecondaryBtnStyle}" Foreground="{StaticResource SecondaryAccent}"/>
-                        <Button Content="SALVA" Command="{Binding ModifyArticleCommand}" Style="{StaticResource PrimaryBtnStyle}"/>
-                        <Button Content="ELIMINA" Command="{Binding DeleteArticleCommand}" Style="{StaticResource DangerBtnStyle}"/>
+                        <Button Content="NEW" Command="{Binding CreateArticleCommand}" Style="{StaticResource SecondaryBtnStyle}" Foreground="{StaticResource SecondaryAccent}"/>
+                        <Button Content="SAVE" Command="{Binding ModifyArticleCommand}" Style="{StaticResource PrimaryBtnStyle}"/>
+                        <Button Content="DELETE" Command="{Binding DeleteArticleCommand}" Style="{StaticResource DangerBtnStyle}"/>
                     </UniformGrid>
                 </Grid>
             </Border>
 
             <Border Grid.Column="2" Background="{StaticResource CardBg}" CornerRadius="12" Padding="20" Margin="15,0,0,0">
                 <StackPanel>
-                    <TextBlock Text="Ricerca e Filtri" FontSize="18" Foreground="{StaticResource TextMain}" FontWeight="Bold" Margin="0,0,0,20"/>
+                    <TextBlock Text="Search - Filter" FontSize="18" Foreground="{StaticResource TextMain}" FontWeight="Bold" Margin="0,0,0,20"/>
 
-                    <TextBlock Text="CERCA PER TITOLO" FontSize="10" Foreground="{StaticResource TextMuted}" Margin="0,0,0,5"/>
+                    <TextBlock Text="SEARCH BY TITLE" FontSize="10" Foreground="{StaticResource TextMuted}" Margin="0,0,0,5"/>
                     <Grid Margin="0,0,0,20">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -211,14 +223,14 @@
 
                     <Separator Background="#334155" Margin="0,0,0,20"/>
 
-                    <TextBlock Text="FILTRO DATA" FontSize="10" Foreground="{StaticResource TextMuted}" Margin="0,0,0,5"/>
+                    <TextBlock Text="DATA FILTER" FontSize="10" Foreground="{StaticResource TextMuted}" Margin="0,0,0,5"/>
                     <DatePicker SelectedDate="{Binding SearchDate}" Margin="0,0,0,10"/>
-                    <Button Content="Applica Filtro Data" Style="{StaticResource SecondaryBtnStyle}" Command="{Binding SearchByDateCommand}" Margin="0,0,0,20"/>
+                    <Button Content="Apply Data Filter" Style="{StaticResource SecondaryBtnStyle}" Command="{Binding SearchByDateCommand}" Margin="0,0,0,20"/>
 
-                    <TextBlock Text="RANGE TEMPORALE" FontSize="10" Foreground="{StaticResource TextMuted}" Margin="0,0,0,5"/>
-                    <DatePicker SelectedDate="{Binding SearchStartDate}" Margin="0,0,0,5"/>
-                    <DatePicker SelectedDate="{Binding SearchEndDate}" Margin="0,0,0,15"/>
-                    <Button Content="Ricerca nel Periodo" Style="{StaticResource PrimaryBtnStyle}" Background="{StaticResource SecondaryAccent}" Command="{Binding SearchInPeriodCommand}"/>
+                    <TextBlock Text="TIME RANGE" FontSize="10" Foreground="{StaticResource TextMuted}" Margin="0,0,0,5"/>
+                    <DatePicker SelectedDate="{Binding SearchStartDate}" Margin="0,0,0,5" />
+                    <DatePicker SelectedDate="{Binding SearchEndDate}" Margin="0,0,0,15" />
+                    <Button Content="Search by time" Style="{StaticResource PrimaryBtnStyle}" Background="{StaticResource SecondaryAccent}" Command="{Binding SearchInPeriodCommand}"/>
                 </StackPanel>
             </Border>
         </Grid>
