@@ -1,0 +1,100 @@
+/* Global app background and text */
+:root{
+  --bg:#0F172A;
+  --card:#1E293B;
+  --input:#334155;
+  --primary:#38BDF8;
+  --secondary:#818CF8;
+  --text-main:#F8FAFC;
+  --text-muted:#94A3B8;
+  --danger:#EF4444;
+}
+
+body.app-bg{
+  background: var(--bg);
+  min-height:100vh;
+  color:var(--text-main);
+  font-family: 'Segoe UI Semibold', 'Segoe UI', sans-serif;
+}
+
+.card-custom{
+  background: var(--card);
+  border-radius:12px;
+  border: none;
+  color: var(--text-main);
+}
+
+.text-main{ color: var(--text-main); }
+.text-primary-accent{ color: var(--primary); }
+.text-muted{ color: var(--text-muted); }
+
+.form-control-dark{
+  background: var(--input);
+  color: var(--text-main);
+  border: 1px solid #475569;
+  border-radius: 6px;
+}
+.form-control-dark:focus{
+  box-shadow: 0 0 0 0.2rem rgba(56,189,248,0.15);
+  border-color: rgba(56,189,248,0.6);
+}
+
+.title-input{ font-size:1.1rem; font-weight:600; }
+
+.posts-list{ padding-right:6px; }
+.list-item-custom{
+  background: transparent;
+  border: none;
+  padding:10px 12px;
+  border-radius:8px;
+}
+.list-item-custom:hover{ background:#253248; }
+.list-item-custom.active{ background:#334155; }
+
+.btn-primary-custom{
+  background: var(--primary);
+  color: var(--bg);
+  border: none;
+  padding:10px 16px;
+  border-radius:6px;
+  font-weight:700;
+}
+.btn-primary-custom:hover{ opacity:0.9; }
+
+.btn-secondary-custom{
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--text-muted);
+  padding:10px 12px;
+  border-radius:6px;
+}
+.btn-secondary-custom:hover{ background:#253248; }
+
+.btn-secondary-outline{
+  background:transparent;
+  color: var(--secondary);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:8px 12px;
+  border-radius:6px;
+}
+
+.btn-danger-custom{
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  padding:10px 12px;
+  border-radius:6px;
+  font-weight:700;
+}
+
+.buttons-row .btn{ min-width:90px; }
+
+.status-msg{ color: #10B981; }
+
+.divider{ border-color:#334155; }
+
+/* ensure scrollbars look good on dark bg */
+.posts-list{ scrollbar-width: thin; }
+.posts-list::-webkit-scrollbar{ width:8px; }
+.posts-list::-webkit-scrollbar-thumb{ background:#253248; border-radius:8px; }
+.posts-list::-webkit-scrollbar-track{ background:transparent; }
