@@ -1,0 +1,195 @@
+:root {
+    --header-offset: 100px;
+    --footer-offset: 84px;
+    --panel-gap: 1rem;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #e2e8f0;
+}
+
+.custom-bg {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 600;
+}
+
+.dashboard-main {
+    min-height: 100dvh;
+}
+
+.dashboard-shell {
+    min-height: calc(100dvh - var(--header-offset) - var(--footer-offset));
+}
+
+.glass-panel {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 320px;
+    height: clamp(360px, calc(100dvh - var(--header-offset) - var(--footer-offset) - var(--panel-gap)), 760px);
+}
+
+.glass-panel:hover {
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.panel-body-scroll,
+.list-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 0.35rem;
+}
+
+.panel-action-fixed {
+    flex-shrink: 0;
+}
+
+.list-group {
+    border-radius: 0.5rem;
+}
+
+.details-textarea {
+    resize: none;
+    min-height: 240px;
+}
+
+.glass-navbar {
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-footer {
+    background: rgba(15, 23, 42, 0.9) !important;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.custom-input {
+    background-color: rgba(15, 23, 42, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #f8fafc !important;
+    transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    border-color: #38bdf8 !important;
+    box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.25) !important;
+}
+
+.list-group-item {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    color: #cbd5e1 !important;
+    transition: background-color 0.2s, color 0.2s;
+    margin-bottom: 4px;
+    border-radius: 0.4rem !important;
+}
+
+.list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #fff !important;
+}
+
+.list-group-item.active {
+    background: linear-gradient(90deg, #38bdf8, #818cf8) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+    font-weight: 500;
+}
+
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.custom-hover:hover {
+    transform: translateY(-2px);
+}
+
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.25) rgba(0,0,0,0.1);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.4);
+}
+
+@media (max-width: 991.98px) {
+    .glass-panel {
+        height: clamp(320px, 58vh, 620px);
+    }
+}
+
+@media (max-width: 767.98px) {
+    :root {
+        --header-offset: 92px;
+        --footer-offset: 76px;
+    }
+
+    .dashboard-shell {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+
+    .glass-panel {
+        height: clamp(300px, 52vh, 560px);
+    }
+
+    .search-group-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .search-group-wrap > .form-control,
+    .search-group-wrap > .btn {
+        width: 100%;
+        flex: 1 1 100%;
+        border-radius: 0.5rem !important;
+    }
+}

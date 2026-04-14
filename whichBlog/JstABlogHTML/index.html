@@ -1,110 +1,122 @@
-<!DOCTYPE html>
-<html lang="it">
+<!doctype html>
+<html lang="it" data-bs-theme="dark">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <title>JstABlog - Dashboard</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Simpleblog - Dashboard</title>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="style.css" rel="stylesheet" />
     </head>
-    <body data-bs-theme="dark" class="bg-dark text-light vh-100">
-        <div class="container-fluid p-4 h-100 d-flex flex-column">
+    <body class="custom-bg">
+        <header class="container-fluid text-center fixed-top glass-navbar">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand fw-bold text-gradient" href="#">Simpleblog</a>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+        <main class="mt-5 pt-4 dashboard-main">
+            <div class="container-fluid px-4 py-3 mb-5 dashboard-shell">
+                <h1 class="text-center mb-4 text-gradient">Posts Management Dashboard</h1>
+                <div class="row g-4 align-items-stretch dashboard-row">
+                    
+                    <div class="col-lg-3 d-flex">
+                        <div class="glass-panel p-4 w-100">
+                            <div class="d-flex justify-content-between align-items-center mb-3 gap-2 flex-wrap">
+                                <h4 class="fw-semibold mb-0">Posts List</h4>
+                                <span id="statusCount" class="badge text-bg-secondary">0 post</span>
+                            </div>
+                            <button type="button" id="btnReload" class="btn btn-outline-light w-100 mb-3 custom-hover panel-action-fixed">
+                                Reload all posts
+                            </button>
+                            <div id="article-list" class="list-group list-scroll custom-scrollbar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-5 d-flex">
+                        <div class="glass-panel p-4 w-100">
+                            <h4 class="fw-semibold mb-3">Post Details</h4>
+                            <div id="statusMessage" class="alert alert-secondary py-2 px-3 small mb-3 panel-action-fixed">Pronto</div>
+                            <div class="panel-body-scroll custom-scrollbar">
+                                <form class="h-100 d-flex flex-column">
+                                    <div class="mb-3 form-floating">
+                                        <input type="text" id="title" name="title" class="form-control custom-input" placeholder="Titolo" />
+                                        <label for="title">Title</label>
+                                    </div>
+                                    <div class="mb-3 d-flex flex-column flex-grow-1">
+                                        <label for="content" class="form-label text-muted small ms-1">Content</label>
+                                        <textarea id="content" name="content" class="form-control custom-input flex-grow-1 details-textarea" rows="12" placeholder="Scrivi qui il contenuto..."></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 mt-4 panel-action-fixed">
+                                <button type="button" id="btnCreate" class="btn btn-success px-4">Create New</button>
+                                <button type="button" id="btnSave" class="btn btn-primary px-4">Save</button>
+                                <button type="button" id="btnDelete" class="btn btn-danger px-4 ms-auto">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 d-flex">
+                        <div class="glass-panel p-4 w-100">
+                            <h4 class="fw-semibold mb-3 panel-action-fixed">Filters & Search</h4>
+                            <div class="panel-body-scroll custom-scrollbar">
+                                <form>
+                                    <div class="mb-4">
+                                        <label for="searchTitle" class="form-label text-muted small">Search by Title</label>
+                                        <div class="input-group">
+                                            <input type="text" name="searchTitle" id="searchTitle" class="form-control custom-input" placeholder="Keyword..." />
+                                            <button type="button" id="btnSearchTitle" class="btn btn-primary px-3">Search</button>
+                                        </div>
+                                    </div>
 
-            <div class="row mb-4">
-                <div class="col-12">
-                    <small class="text-info fw-bold">POST MANAGEMENT CONSOLE</small>
-                    <h1 class="display-6 mt-2">Dashboard</h1>
+                                    <div class="mb-4">
+                                        <label for="searchContent" class="form-label text-muted small">Search by Content</label>
+                                        <div class="input-group">
+                                            <input type="text" name="searchContent" id="searchContent" class="form-control custom-input" placeholder="Keyword..." />
+                                            <button type="button" id="btnSearchContent" class="btn btn-primary px-3">Search</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="searchDate" class="form-label text-muted small">Exact Date</label>
+                                        <div class="input-group search-group-wrap">
+                                            <input type="date" id="searchDate" name="searchDate" class="form-control custom-input" />
+                                            <button type="button" id="btnSearchDate" class="btn btn-outline-primary px-3">Search</button>
+                                            <button type="button" id="btnSearchDateCount" class="btn btn-outline-secondary px-3">Count</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted small">By Period (From - To)</label>
+                                        <div class="input-group mb-2 search-group-wrap">
+                                            <input type="date" id="searchPeriodFrom" name="searchPeriodFrom" class="form-control custom-input" />
+                                            <input type="date" id="searchPeriodTo" name="searchPeriodTo" class="form-control custom-input" />
+                                        </div>
+                                        <button type="button" id="btnSearchPeriod" class="btn btn-outline-info w-100 mt-2">Search in Period</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </main>
 
-            <div class="row g-3 flex-grow-1 mb-4">
+        <footer class="text-center py-3 text-muted mt-4 glass-footer fixed-bottom">
+            <p class="m-0 small">Simple Blog | Made by JstRev &bull; Powered by Firebase &copy; 2026</p>
+        </footer>
 
-                <div class="col-12 col-lg-3">
-                    <div class="card h-100 border-0 bg-secondary bg-opacity-10">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-light mb-3">Posts' Archive</h5>
-                            <div class="mb-3">
-                                <button class="btn btn-outline-light w-100" type="button">Reload List</button>
-                            </div>
-
-                            <div class="list-group list-group-flush flex-grow-1 overflow-auto pe-2">
-                                <a href="#" class="list-group-item list-group-item-action active border-0 rounded mb-1">
-                                    <div class="fw-bold">Esempio di Titolo</div>
-                                    <small class="text-light text-opacity-75">12/03/2026</small>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action border-0 rounded mb-1 bg-transparent">
-                                    <div class="fw-bold">Altro Post</div>
-                                    <small class="text-secondary">01/02/2026</small>
-                                </a>
-                            </div>
-
-                            <div class="mt-3 small text-success">Pronto</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card h-100 border-0 bg-secondary bg-opacity-10">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-light mb-3">Editor</h5>
-
-                            <label class="form-label text-secondary small mb-1 fw-bold">TITLE</label>
-                            <input class="form-control mb-3 fs-5 fw-semibold" type="text" placeholder="Titolo dell'articolo">
-
-                            <label class="form-label text-secondary small mb-1 fw-bold">BODY</label>
-                            <textarea class="form-control flex-grow-1 mb-3" placeholder="Contenuto..."></textarea>
-
-                            <div class="d-flex justify-content-between mt-2">
-                                <button class="btn btn-outline-primary px-4">NEW</button>
-                                <button class="btn btn-info fw-bold text-dark px-4">SAVE</button>
-                                <button class="btn btn-danger fw-bold px-4">DELETE</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-3">
-                    <div class="card h-100 border-0 bg-secondary bg-opacity-10">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-light mb-3">Search - Filter</h5>
-
-                            <label class="form-label text-secondary small mb-1 fw-bold">SEARCH BY TITLE</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Titolo">
-                                <button class="btn btn-info text-dark fw-bold" type="button">Cerca</button>
-                            </div>
-
-                            <hr class="border-secondary opacity-50">
-
-                            <label class="form-label text-secondary small mb-1 fw-bold">DATA FILTER</label>
-                            <input type="date" class="form-control mb-2">
-                            <button class="btn btn-outline-light mb-4 w-100">Apply Data Filter</button>
-
-                            <label class="form-label text-secondary small mb-1 fw-bold">TIME RANGE</label>
-                            <input type="date" class="form-control mb-2">
-                            <input type="date" class="form-control mb-3">
-                            <button class="btn btn-info fw-bold text-dark w-100 mt-auto">Search by time</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <footer class="mt-auto py-3 border-top border-secondary border-opacity-25">
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                    <span class="text-secondary small">&copy; 2026 JstABlog Console. Made by JstRev - ENDRI.</span>
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a href="https://github.com/JstRev" class="nav-link px-2 text-secondary small">JstRev</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://github.com/JstRev/JstABlog" class="nav-link px-2 text-secondary small">Github Repo</a>
-                        </li>
-                    </ul>
-                </div>
-            </footer>
-
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="module" src="pages/index.js"></script>
     </body>
 </html>
