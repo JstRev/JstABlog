@@ -6,6 +6,7 @@
 
 html, body {
     height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -36,6 +37,7 @@ h1, h2, h3, h4 {
 
 .dashboard-shell {
     min-height: calc(100dvh - var(--header-offset) - var(--footer-offset));
+    padding-bottom: calc(var(--footer-offset) + 1.5rem);
 }
 
 .glass-panel {
@@ -157,6 +159,12 @@ h1, h2, h3, h4 {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgba(255,255,255,0.4);
+}
+
+@media (max-width: 991.98px) {
+    html, body {
+        overflow: auto;
+    }
 }
 
 @media (max-width: 991.98px) {
